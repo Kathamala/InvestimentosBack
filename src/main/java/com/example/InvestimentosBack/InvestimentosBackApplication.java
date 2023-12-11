@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class InvestimentosBackApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(InvestimentosBackApplication.class, args);
 	}
 
