@@ -15,7 +15,16 @@ public class Wallet {
         this.timeToReachGoal = Integer.MAX_VALUE;
         this.yearlyInvestments = new ArrayList<ArrayList<Investment>>();
         this.yearlyInvestments.add(firstYearInvestments);
-        calculateYields(1);
+        Double firstYearAmount = 0.0;
+        for (Investment fy: firstYearInvestments) {
+            firstYearAmount += fy.getValue();
+        }
+        if(firstYearAmount >= goal){
+            timeToReachGoal = 1;
+        }
+        else{
+            calculateYields(1);
+        }
 
     }
 
@@ -88,7 +97,8 @@ public class Wallet {
                 yearlyInvestments.add(nextYearInvestments);
             }
         }
-        timeToReachGoal = yearlyInvestments.size();
+        timeToReachGoal = index+1;
+        yearlyInvestments = new ArrayList<>(yearlyInvestments.subList(0, timeToReachGoal));
 
     }
 }
