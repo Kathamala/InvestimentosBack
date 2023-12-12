@@ -37,4 +37,11 @@ public class WalletService {
         wallet.setNewInvestment(newYearlyInvestments, year);
         return WalletRepository.update(wallet);
     }
+
+    public Wallet updateGoal(Integer id, Double newGoal) {
+        Wallet wallet = WalletRepository.getOne(id);
+        if(wallet == null) return null;
+        wallet.setGoal(newGoal);
+        return WalletRepository.update(wallet);
+    }
 }

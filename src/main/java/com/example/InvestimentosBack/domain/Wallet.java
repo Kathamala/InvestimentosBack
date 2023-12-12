@@ -15,7 +15,7 @@ public class Wallet {
         this.timeToReachGoal = Integer.MAX_VALUE;
         this.yearlyInvestments = new ArrayList<ArrayList<Investment>>();
         this.yearlyInvestments.add(firstYearInvestments);
-        calculateYields(0);
+        calculateYields(1);
 
     }
 
@@ -32,7 +32,7 @@ public class Wallet {
         Double currentAmount = 0.0;
         boolean calculateNewYears = false;
         Integer index = 0;
-        while(goal < currentAmount && !calculateNewYears){
+        while(goal >= currentAmount){
             currentAmount = 0.0;
             if(index >= yearlyInvestments.size()) {
                 calculateNewYears = true;
@@ -47,7 +47,7 @@ public class Wallet {
             calculateYields(index);
         }
         else{
-            yearlyInvestments = (ArrayList<ArrayList<Investment>>) yearlyInvestments.subList(index, yearlyInvestments.size());
+            yearlyInvestments = new ArrayList<ArrayList<Investment>>(yearlyInvestments.subList(0, index+1));
         }
         timeToReachGoal = yearlyInvestments.size();
     }
@@ -64,14 +64,14 @@ public class Wallet {
         if(index < 0 || index > yearlyInvestments.size()) {
             return;
         }else{
-            yearlyInvestments.set(index, yearInvestment);
+            yearlyInvestments.set(index-1, yearInvestment);
         }
         calculateYields(index);
     }
     private void calculateYields(Integer startYear){
         if(startYear > timeToReachGoal) return;
         Double nextYearAmount = 0.0;
-        Integer index = startYear;
+        Integer index = startYear-1;
         while(nextYearAmount <= goal){
             nextYearAmount = 0.0;
             ArrayList<Investment> nextYearInvestments = new ArrayList<Investment>();
@@ -80,7 +80,7 @@ public class Wallet {
                 nextYearInvestments.add(new Investment(investment.getId(), investment.getName(), investment.getType(), nextYearAmount, investment.getYieldRate()));
             }
             index++;
-            if(index < yearlyInvestments.size()) {
+            if(index < yearlyInvestments.size()-1) {
                 yearlyInvestments.set(index, nextYearInvestments);
                 break;
             }

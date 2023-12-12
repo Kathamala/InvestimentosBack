@@ -10,10 +10,12 @@ public class WalletRepository {
         return wallet;
     }
     public static Wallet add(Wallet newWallet) {
+        if(getOne(newWallet.getId()) != null) return null;
         wallet.add(newWallet);
         return newWallet;
     }
     public static Wallet getOne(Integer id) {
+        if(id == null) return null;
         for(Wallet w : wallet){
             if(w.getId() == id){
                 return w;
