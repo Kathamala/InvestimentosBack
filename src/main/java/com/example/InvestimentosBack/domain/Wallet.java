@@ -47,7 +47,7 @@ public class Wallet {
             calculateYields(index);
         }
         else{
-            yearlyInvestments = new ArrayList<ArrayList<Investment>>(yearlyInvestments.subList(0, index+1));
+            yearlyInvestments = new ArrayList<ArrayList<Investment>>(yearlyInvestments.subList(0, index));
         }
         timeToReachGoal = yearlyInvestments.size();
     }
@@ -77,7 +77,7 @@ public class Wallet {
             ArrayList<Investment> nextYearInvestments = new ArrayList<Investment>();
             for(Investment investment : yearlyInvestments.get(index)){
                 nextYearAmount += investment.getValue()*(investment.getYieldRate()+1);
-                nextYearInvestments.add(new Investment(investment.getId(), investment.getName(), investment.getType(), nextYearAmount, investment.getYieldRate()));
+                nextYearInvestments.add(new Investment(investment.getId(), investment.getName(), investment.getType(), investment.getValue()*(investment.getYieldRate()+1), investment.getYieldRate()));
             }
             index++;
             if(index < yearlyInvestments.size()-1) {
