@@ -32,6 +32,10 @@ public class Wallet {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Double getGoal() {
         return goal;
     }
