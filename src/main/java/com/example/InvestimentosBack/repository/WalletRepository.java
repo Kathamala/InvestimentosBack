@@ -10,15 +10,19 @@ public class WalletRepository {
         return wallet;
     }
     public static Wallet add(Wallet newWallet) {
-        if(getOne(newWallet.getId()) != null) return null;
-        if(newWallet.getId() == null){
-            if(wallet.isEmpty()){
-                newWallet.setId(1);
-            } else{
-                newWallet.setId(wallet.get(wallet.size()-1).getId() + 1);
-            }
-        };
-        wallet.add(newWallet);
+        if(getOne(newWallet.getId()) != null){
+            update(newWallet);
+        } else{
+            if(newWallet.getId() == null){
+                if(wallet.isEmpty()){
+                    newWallet.setId(1);
+                } else{
+                    newWallet.setId(wallet.get(wallet.size()-1).getId() + 1);
+                }
+            };
+            wallet.add(newWallet);
+        }
+
         return newWallet;
     }
     public static Wallet getOne(Integer id) {

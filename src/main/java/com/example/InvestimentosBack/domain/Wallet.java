@@ -73,6 +73,10 @@ public class Wallet {
         return yearlyInvestments;
     }
 
+    public void clearInvestments(){
+        yearlyInvestments.clear();
+    }
+
     public void setNewInvestment(ArrayList<Investment> yearInvestment, Integer index){
         if(index < 0 || index > yearlyInvestments.size()) {
             return;
