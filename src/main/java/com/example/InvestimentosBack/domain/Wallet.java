@@ -87,19 +87,23 @@ public class Wallet {
     }
     private void calculateYields(Integer startYear){
         if(startYear > timeToReachGoal) return;
-        Double nextYearAmount = 0.0;
+        Double currentYearAmount = 0.0;
         Integer index = startYear-1;
-        while(nextYearAmount <= goal){
-            nextYearAmount = 0.0;
+        boolean hasReachedGoal = false;
+        while(!hasReachedGoal){
+            currentYearAmount = 0.0;
             ArrayList<Investment> nextYearInvestments = new ArrayList<Investment>();
             for(Investment investment : yearlyInvestments.get(index)){
-                nextYearAmount += investment.getValue()*(investment.getYieldRate()+1);
+                currentYearAmount += investment.getValue();
                 nextYearInvestments.add(new Investment(investment.getId(), investment.getName(), investment.getType(), investment.getValue()*(investment.getYieldRate()+1), investment.getYieldRate()));
+            }
+            if(currentYearAmount >= goal){
+                hasReachedGoal = true;
+                break;
             }
             index++;
             if(index < yearlyInvestments.size()-1) {
                 yearlyInvestments.set(index, nextYearInvestments);
-                break;
             }
             else{
                 yearlyInvestments.add(nextYearInvestments);
