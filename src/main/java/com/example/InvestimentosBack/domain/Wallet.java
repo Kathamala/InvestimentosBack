@@ -95,7 +95,7 @@ public class Wallet {
             ArrayList<Investment> nextYearInvestments = new ArrayList<Investment>();
             for(Investment investment : yearlyInvestments.get(index)){
                 currentYearAmount += investment.getValue();
-                nextYearInvestments.add(new Investment(investment.getId(), investment.getName(), investment.getType(), investment.getValue()*(investment.getYieldRate()+1), investment.getYieldRate()));
+                nextYearInvestments.add(new Investment(investment.getId(), investment.getName(), investment.getType(), investment.getValue()*(1+(investment.getYieldRate()/100)), investment.getYieldRate()));
             }
             if(currentYearAmount >= goal){
                 hasReachedGoal = true;
